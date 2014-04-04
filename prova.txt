@@ -1,2 +1,3 @@
 riga 1 primo commit
 riga 2 commit 2
+riga 3 commit 3
