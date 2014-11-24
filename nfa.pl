@@ -13,10 +13,10 @@ accept([_|Is], S) :-
 	accept(Is, N).
 	%write(S),write(delta),write(N).
 
-%accept(_,Q) :-
-%	statoErrore(Q),
-%	!,
-%	fail.
+accept(_,Q) :-
+	statoErrore(Q),
+	!,
+	fail.
 accept([],Q) :- 
 	final(_,Q).
 

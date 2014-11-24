@@ -20,7 +20,7 @@ nfa_compile_regexp(FA_ID, Reg) :-
 	functor(FA_ID, _, 0),		%controlla che FA_ID sia fatto bene
 								%TODO rivedere la specifica non chiarissima
 	
-	is_regexp(Reg),				%controlla che Reg sia valida
+	%is_regexp(Reg),				%controlla che Reg sia valida
 	gensym(FA_ID, SymStart),	%crea uno stato iniziale
 	assert(initial(FA_ID, SymStart)),
 	nfa_compile_token(FA_ID, SymStart, OutState, Reg, falso),	%lancia 
