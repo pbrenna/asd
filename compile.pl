@@ -41,6 +41,11 @@ nfa_compile_regexp(FA_ID, Reg) :-
 
 :- consult('bar.pl').
 
+:- consult('alt.pl').
+
+:- consult('oneof.pl').
+
+
 nfa_compile_token(_,_,_,X,_):- is_list(X),
 	!,
 	fail.
