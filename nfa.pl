@@ -1,34 +1,24 @@
-accept([I|Is], S) :-
-	delta(_,S, I, N),
-	accept(Is, N).
-	%write(S),write(I),write(N).
+nfa_accept(FA_ID, [I|Is], S) :-
+	delta(FA_ID,S, I, N),
+	nfa_accept(FA_ID, Is, N).
 
-accept(Is, S) :-
-	delta(_,S, epsilon, N),
-	accept(Is, N).
-	%write(S),write(delta),write(N).
+nfa_accept(FA_ID, Is, S) :-
+	delta(FA_ID, S, epsilon, N),
+	nfa_accept(FA_ID, Is, N).
 
-accept([_|Is], S) :-
-	delta(_,S, qualunque_cosa, N),
-	accept(Is, N).
-	%write(S),write(delta),write(N).
+nfa_accept(FA_ID, [_|Is], S) :-
+	delta(FA_ID,S, qualunque_cosa, N),
+	accept(FA_ID, Is, N).
 
-accept(_,Q) :-
-	statoErrore(Q),
-	!,
-	fail.
-accept([],Q) :- 
-	final(_,Q).
+%nfa_accept(FA_ID, _, Q) :-
+%	statoErrore(FA_ID, Q),
+%	!,
+%	fail.
 
-recognise(Input) :- 
-	initial(_,S),
-	accept(Input,S), 
+nfa_accept(FA_ID, [], Q) :- 
+	final(FA_ID, Q).
+
+nfa_recognise(FA_ID, Input) :-
+	initial(FA_ID, S),
+	nfa_accept(FA_ID, Input, S),
 	!.
-
-
-%delta(a,q0,epsilon,q1).
-%delta(a,q1,a,q2).
-%delta(a,q2,epsilon,q1).
-%delta(a,q0,epsilon,q3).
-%delta(a,q2,epsilon,q3).
-%final(q3).
