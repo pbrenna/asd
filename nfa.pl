@@ -8,7 +8,7 @@ nfa_accept(FA_ID, Is, S) :-
 
 nfa_accept(FA_ID, [_|Is], S) :-
 	delta(FA_ID,S, qualunque_cosa, N),
-	accept(FA_ID, Is, N).
+	nfa_accept(FA_ID, Is, N).
 
 %nfa_accept(FA_ID, _, Q) :-
 %	statoErrore(FA_ID, Q),
