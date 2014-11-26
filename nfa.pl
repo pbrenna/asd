@@ -1,4 +1,10 @@
 nfa_accept(FA_ID, [I|Is], S) :-
+	verso_il_male(S),
+	delta(FA_ID,S, I, N),
+	!,
+	nfa_accept(FA_ID, Is, N).
+
+nfa_accept(FA_ID, [I|Is], S) :-
 	delta(FA_ID,S, I, N),
 	nfa_accept(FA_ID, Is, N).
 
@@ -18,7 +24,7 @@ nfa_accept(FA_ID, [_|Is], S) :-
 nfa_accept(FA_ID, [], Q) :- 
 	final(FA_ID, Q).
 
-nfa_recognise(FA_ID, Input) :-
+nfa_recognize(FA_ID, Input) :-
 	initial(FA_ID, S),
 	nfa_accept(FA_ID, Input, S),
 	!.
