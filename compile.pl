@@ -2,6 +2,7 @@
 %sia stato mai usato.
 :- dynamic initial/2.
 :- multifile nfa_compile_token/5.
+:- dynamic verso_il_male/1.
 %Predicato nfa_compile_regexp
 %InState è uno stato già esistente a cui il nuovo automa di token si collegherà
 %con una epsilon mossa. 
