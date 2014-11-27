@@ -1,10 +1,16 @@
 
 %star(Reg), riciclato per plus(Reg)
+%nfa_compile_token(FA_ID, InState, OutState, star(star(Reg)), _) :- 
+%	nfa_compile_token(FA_ID, InState, OutState, star(Reg), falso).
+
+nfa_compile_token(FA_ID, Instate, OutState, star(Reg),vero) :-
+	nfa_compile_token(FA_ID, Instate, OutState, Reg,vero).
+
 nfa_compile_token(FA_ID, InState, OutState, star(Reg), falso) :-
 	gensym(FA_ID,Sym1),									%occorre stato d'entrata
 	assert(delta(FA_ID, InState, epsilon, Sym1)),		%collegato al resto
 	
-	nfa_compile_token(FA_ID, Sym1, OutStateRic, Reg, falso),	%ricorsione per 
+	nfa_compile_token(FA_ID, Sym1, OutStateRic, Reg, vero),	%ricorsione per 
 														%creare
 														%l'automa dell'argomento
 

@@ -15,7 +15,7 @@
 %	assert(statoErrore(OutStateRic)).
 
 
-nfa_compile_token(FA_ID, InState, OutMangiatutto, bar(Reg), falso) :-
+nfa_compile_token(FA_ID, InState, OutMangiatutto, bar(Reg), _) :-
 	gensym(FA_ID, Inizio),
 	assert(delta(FA_ID, InState, epsilon, Inizio)),
 	gensym(FA_ID, InMangiatutto),
