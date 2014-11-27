@@ -20,4 +20,4 @@ nfa_compile_token(FA_ID, InState, OutState, star(Reg), falso) :-
 															
 	assert(delta(FA_ID, Sym1, epsilon, OutState)).	%e-mossa da ingresso a
 													%uscita di star
-
+%ciao
