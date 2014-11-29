@@ -15,13 +15,13 @@ nfa_compile_token(FA_ID, InState, OutState, [alt|Args], TogliStar) :-
 	nfa_compile_token_alt(FA_ID, Inizio, OutState, Args, TogliStar).
 
 %caso base della ricorsione
-nfa_compile_token_alt(_,_,_,[], _).
+nfa_compile_token_alt(_, _, _, [], _).
 %caso ricorsivo
 nfa_compile_token_alt(FA_ID, Inizio, OutState, [Primo | Args], TogliStar) :-
 	%compilo l'espressione connettendola allo stato iniziale dell'alt
 	nfa_compile_token(FA_ID, Inizio, OutStateRic, Primo, TogliStar),
-	%connetto con e-mossa lo stato finale del sotto-automa allo stato finale
-	%di alt
+	%connetto con e-mossa lo stato finale del sotto-automa allo
+	%stato finale di alt
 	assert(delta(FA_ID, OutStateRic, epsilon, OutState)),
 	%eseguo la ricorsione sulle altre espressioni.
 	nfa_compile_token_alt(FA_ID, Inizio, OutState, Args, TogliStar).

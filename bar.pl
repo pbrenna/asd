@@ -13,5 +13,5 @@ nfa_compile_token(FA_ID, InState, OutMangiatutto, bar(Reg), _) :-
 	assert(statoErrore(FA_ID, OutStateErr)),
 	mangiatutto(Reg, Reg2),
 	nfa_compile_token(FA_ID, InMangiatutto, OutMangiatutto, Reg2, falso),
-	assert((delta(FA_ID, Inizio, epsilon,InMangiatutto) :- 
-				not(raggiuntoErrore(FA_ID, OutStateErr)))).
+	assert((delta(FA_ID, Inizio, epsilon, InMangiatutto) :-
+				\+raggiuntoErrore(FA_ID, OutStateErr))).
