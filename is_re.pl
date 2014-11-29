@@ -25,11 +25,9 @@ is_regexp([oneof|X]) :-
 	foreach(X,atomic), 
 	!.
 %se X è una lista dobbiamo fermarci per non spacchettare cose a caso
-is_regexp(X):- is_list(X),
-	!, 
-	fail.
 %spacchettamento per predicati con arità variabile
 is_regexp(X) :- 
+	\+is_list(X),
 	compound(X),
 	X =.. Y,
 	is_regexp(Y).

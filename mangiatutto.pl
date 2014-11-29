@@ -1,3 +1,7 @@
+%mangiatutto(InEspressione, OutEspressione)
+%trasforma un espressione regolare sostituendo ad ogni atomo il letterale
+%qualunque_cosa. Occorre per un'implementazione economica di bar
+
 mangiatutto(Xatomico, qualunque_cosa) :-
 	atomic(Xatomico).
 
@@ -7,6 +11,7 @@ mangiatutto(star(Reg), star(Nuovo)) :-
 mangiatutto(plus(Reg), plus(Nuovo)) :-
 	mangiatutto(Reg, Nuovo).
 
+%occhio!
 mangiatutto(bar(Reg), Nuovo) :-
 	mangiatutto(Reg, Nuovo).
 	

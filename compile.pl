@@ -8,8 +8,8 @@
 %InState è uno stato già esistente a cui il nuovo automa di token si collegherà
 %con una epsilon mossa. 
 %OutState è lo stato che il nuovo token crea come stato di uscita dal token.
-%l'argomento 5, Complementa, è "vero" se siamo dentro ad un numero dispari di
-%not
+%l'argomento 5, TogliStar, è "vero" se siamo direttamente dentro a uno star o
+%dentro a uno star(alt()).
 
 %questo è necessario per non duplicare un automa 
 nfa_compile_regexp(FA_ID,_) :-
@@ -22,7 +22,7 @@ nfa_compile_regexp(FA_ID, Reg) :-
 	functor(FA_ID, _, 0),		%controlla che FA_ID sia fatto bene
 								%TODO rivedere la specifica non chiarissima
 	
-	%is_regexp(Reg),				%controlla che Reg sia valida
+	is_regexp(Reg),				%controlla che Reg sia valida
 	gensym(FA_ID, SymStart),	%crea uno stato iniziale
 	assert(initial(FA_ID, SymStart)),
 	nfa_compile_token(FA_ID, SymStart, OutState, Reg, falso),	%lancia 
@@ -48,10 +48,8 @@ nfa_compile_regexp(FA_ID, Reg) :-
 :- consult('oneof.pl').
 
 
-nfa_compile_token(_,_,_,X,_):- is_list(X),
-	!,
-	fail.
-nfa_compile_token(FA_ID, InState, OutState, X, Complementa) :- 
+nfa_compile_token(FA_ID, InState, OutState, X, TogliStar) :-
+	\+is_list(X), 
 	compound(X),
 	X =.. Y,
-	nfa_compile_token(FA_ID, InState, OutState, Y, Complementa).
+	nfa_compile_token(FA_ID, InState, OutState, Y, TogliStar).

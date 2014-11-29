@@ -1,19 +1,9 @@
-%nfa_compile_token(FA_ID, InState, OutState, bar(Reg), falso) :-
-%	nfa_compile_token(FA_ID, InState, OutState, Reg, vero).
-
-%nfa_compile_token(FA_ID, InState, OutState, bar(Reg), vero) :-
-%	nfa_compile_token(FA_ID, InState, OutState, Reg, falso).
-
-%nfa_compile_token(FA_ID, InState, OutState, barStupido(barStupido(Reg)), _) :-
-%	nfa_compile_token(FA_ID, InState, OutState, Reg, falso).
-%nfa_compile_token(FA_ID, InState, OutState, barStupido(Reg), _) :-
-%	gensym(FA_ID, Sym1),
-%	assert(delta(FA_ID, InState, epsilon,Sym1)),
-%	gensym(FA_ID, OutState),
-%	nfa_compile_token(FA_ID, Sym1, OutStateRic, Reg, falso),
-%	assert(delta(FA_ID, Sym1, epsilon, OutState)),
-%	assert(statoErrore(OutStateRic)).
-
+%Affinché bar consumi input, è necessario creare un secondo automa
+%parallelamente al primo, che consumi lo stesso numero di simboli di quello
+%negato. Ciò si ottiene grazie alla trasformazione mangiatutto.
+%Qualora lo stato negato dovesse accettare la stringa, è necessario che tale
+%automa parallelo venga reso inaccessibile, effetto ottenuto condizionando
+%la e-mossa con cui lo si raggiunge.
 
 nfa_compile_token(FA_ID, InState, OutMangiatutto, bar(Reg), _) :-
 	gensym(FA_ID, Inizio),
@@ -25,6 +15,3 @@ nfa_compile_token(FA_ID, InState, OutMangiatutto, bar(Reg), _) :-
 	nfa_compile_token(FA_ID, InMangiatutto, OutMangiatutto, Reg2, falso),
 	assert((delta(FA_ID, Inizio, epsilon,InMangiatutto) :- 
 				not(raggiuntoErrore(FA_ID, OutStateErr)))).
-
-%nfa_compile_token(FA_ID, InState, OutState, bar(Reg), _) :-
-	
