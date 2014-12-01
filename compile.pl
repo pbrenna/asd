@@ -18,6 +18,7 @@ nfa_compile_regexp(FA_ID, _) :-
 	
 %predicato d'ingresso, inizia la ricorsione.
 nfa_compile_regexp(FA_ID, Reg) :-
+	nonvar(FA_ID),
 	%controlla che FA_ID sia fatto bene
 	functor(FA_ID, _, 0),
 	%controlla che Reg sia valida

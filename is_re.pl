@@ -1,6 +1,10 @@
 %ogni atomo è un'espressione regolare
-is_regexp(X) :- 
-	atomic(X),
+is_regexp(X):-
+	var(X),
+	!,
+	fail.
+is_regexp(X) :-
+	atomic(X), 
 	!.
 
 %star(regexp) è regexp, come plus e bar

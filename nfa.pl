@@ -18,6 +18,7 @@ nfa_accept(FA_ID, [], Q) :-
 
 nfa_recognize(FA_ID, Input) :-
 	retractall(raggiuntoErrore(_, _)),
+	nonvar(FA_ID),
+	nonvar(Input),
 	initial(FA_ID, S),
-	nfa_accept(FA_ID, Input, S),
-	!.
+	nfa_accept(FA_ID, Input, S).
